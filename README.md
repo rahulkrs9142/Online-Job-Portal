@@ -1,16 +1,80 @@
-# React + Vite
+# Joboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Joboard is a React job search interface backed by Firebase Firestore. It displays the newest jobs first, lets users filter listings by role, type, location, and experience level, and links each listing to its application page.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Firestore-powered job listings
+- Newest-first sorting by `postedOn`
+- Exact-match filtering for job role, type, location, and experience
+- Clear-filters action after a search
+- Relative posting dates and skill tags
+- External application links
 
-## React Compiler
+## Tech stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite
+- Tailwind CSS
+- Firebase Firestore
+- Day.js
 
-## Expanding the ESLint configuration
+## Getting started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Prerequisites
+
+- Node.js 18 or newer
+- A Firebase project with Cloud Firestore enabled
+
+### Install and run
+
+```bash
+npm install
+npm run dev
+```
+
+Open the local URL printed by Vite, usually `http://localhost:5173`.
+
+## Firestore data
+
+The app reads from a collection named `jobs`. Each document should contain the following fields:
+
+| Field | Type | Example |
+| --- | --- | --- |
+| `title` | string | `Frontend Developer` |
+| `company` | string | `Google` |
+| `type` | string | `Full-time` |
+| `experience` | string | `Mid Level` |
+| `location` | string | `Remote` |
+| `skills` | array of strings | `["React", "CSS"]` |
+| `job_link` | string | `https://example.com/jobs/123` |
+| `postedOn` | Firestore Timestamp | `2026-05-16` |
+
+`postedOn` must be a Firestore Timestamp because the app converts it with `.toDate()`. Filtering uses exact values, so the stored values must match the options in the search controls, including capitalization.
+
+The Firebase project configuration is in `src/firebase.config.js`. Replace it with your own project configuration before deploying the app, and configure Firestore security rules appropriate for your environment.
+
+## Available scripts
+
+```bash
+npm run dev       # Start the Vite development server
+npm run build     # Create a production build
+npm run preview   # Preview the production build locally
+npm run lint      # Run ESLint
+```
+
+## Project structure
+
+```text
+src/
+|-- components/
+|   |-- Header/
+|   |-- JobCard/
+|   |-- Navbar/
+|   `-- SearchBar/
+|-- App.jsx
+|-- JobDummyData.js
+|-- firebase.config.js
+|-- App.css
+`-- index.css
+```
