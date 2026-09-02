@@ -1,6 +1,7 @@
 # Joboard
 
-Joboard is a React job search interface backed by Firebase Firestore. It displays the newest jobs first, lets users filter listings by role, type, location, and experience level, and links each listing to its application page.
+**Joboard** is a modern React-based job search platform powered by **Firebase Firestore**. It displays the latest job opportunities first and allows users to easily filter jobs by **role, job type, location, and experience level**. Each listing provides essential job details along with a direct **application link**, making the job search process simple, fast, and user-friendly.
+
 
 ## Features
 
